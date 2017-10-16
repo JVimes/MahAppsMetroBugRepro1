@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace MahApps.Metro.Application2
 {
@@ -24,6 +25,15 @@ namespace MahApps.Metro.Application2
         public MainWindow()
         {
             InitializeComponent();
+
+            Loaded += MainWindow_Loaded;
+        }
+
+        private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            var dialog = Resources["theDialog"] as BaseMetroDialog;
+            await this.ShowMetroDialogAsync(dialog);
+            await dialog.WaitUntilUnloadedAsync();
         }
     }
 }
